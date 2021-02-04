@@ -1,38 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import OneSignal from "react-onesignal";
-
-OneSignal.isPushNotificationsEnabled((isEnabled) => {
-    if (isEnabled) {
-        // user has subscribed
-        OneSignal.getUserId(function (userId) {
-            console.log("player_id of the subscribed user is : " + userId);
-            // Make a POST call to your server with the user ID
-        });
-    } else {
-        console.log("user is not subscribed");
-    }
-});
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <section>
+            <h1>This is a react app</h1>
+        </section>
     );
 }
 
