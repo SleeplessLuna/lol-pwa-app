@@ -3,9 +3,10 @@ import OneSignal from "react-onesignal";
 
 OneSignal.initialize("d7e0ffdf-e3cc-418f-b319-8d70e58ccdeb");
 
-const playerId = await OneSignal.getPlayerId();
-
-console.log(playerId);
+async () => {
+    const playerId = await OneSignal.getPlayerId();
+    console.log(playerId);
+};
 
 function App() {
     return (
