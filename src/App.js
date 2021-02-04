@@ -1,6 +1,5 @@
 import React from "react";
-
-const OneSignal = window.OneSignal;
+const OneSignal = window.OneSignal || [];
 
 OneSignal.push(function () {
     /* These examples are all valid */
