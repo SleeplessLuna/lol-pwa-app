@@ -3,8 +3,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import OneSignal from "react-onesignal";
 
-OneSignal.initialize("8da4fc0d-700a-49bb-9d1f-63169284f317");
-
 OneSignal.isPushNotificationsEnabled((isEnabled) => {
     if (isEnabled) {
         // user has subscribed
