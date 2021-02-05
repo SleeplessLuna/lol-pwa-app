@@ -27,19 +27,19 @@ const ContextProvider = (props) => {
                     body: JSON.stringify({
                         app_id: "d7e0ffdf-e3cc-418f-b319-8d70e58ccdeb",
                         include_player_ids: [`${OneSignalUserId}`],
-                        data: {"foo": "bar"},
-                        contents: {"en": "English Message"}
-                    })
+                        data: { foo: "bar" },
+                        contents: { en: "English Message" },
+                    }),
                 }
             );
             const result = await response.json();
             console.log(result);
             setResult(result);
         })();
-    }, []);
+    }, [OneSignalUserId]);
 
     return (
-        <Context.Provider value={{Result}}>{props.children}</Context.Provider>
+        <Context.Provider value={{ Result }}>{props.children}</Context.Provider>
     );
 };
 
