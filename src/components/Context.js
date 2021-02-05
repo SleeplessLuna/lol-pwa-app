@@ -3,18 +3,26 @@ import React, { useState, useEffect, createContext } from "react";
 export const Context = createContext();
 
 const ContextProvider = (props) => {
+    const OneSignal = window.OneSignal || [];
     const [OneSignalUserId, setOneSignalUserId] = useState(null);
     const [Result, setResult] = useState(null);
 
-    async function GiveMeTheUserID() {
-        const OneSignal = window.OneSignal || [];
-        OneSignal.push(function () {
-            OneSignal.getUserId().then(function (userId) {
-                console.log("OneSignal User ID:", userId);
-                setOneSignalUserId(userId);
+    function GiveMeTheUserID() {
+        if (OneSignal !== []) {
+            OneSignal.push(function () {
+                OneSignal.getUserId().then(function (userId) {
+                    console.log("OneSignal User ID:", userId);
+                    setOneSignalUserId(userId);
+                });
             });
-        });
+        } else {
+            console.log(
+                "i am an uncaught error for some reason and i dont know why"
+            );
+        }
     }
+
+    GiveMeTheUserID();
 
     /*     if (OneSignal !== []) {
         OneSignal.push(function () {
@@ -27,7 +35,6 @@ const ContextProvider = (props) => {
 
     useEffect(() => {
         (async () => {
-            await GiveMeTheUserID();
             const response = await fetch(
                 `https://onesignal.com/api/v1/notifications`,
                 {
@@ -37,7 +44,7 @@ const ContextProvider = (props) => {
                     },
                     body: JSON.stringify({
                         app_id: "d7e0ffdf-e3cc-418f-b319-8d70e58ccdeb",
-                        include_player_ids: [`${OneSignalUserId}`],
+                        include_player_ids: [`${await OneSignalUserId}`],
                         data: { foo: "bar" },
                         contents: { en: "English Message" },
                     }),
