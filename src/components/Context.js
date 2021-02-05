@@ -21,7 +21,6 @@ const ContextProvider = (props) => {
                 {
                     method: "POST",
                     headers: {
-                        "Authorization": process.env.REACT_APP_ONESIGNAL_API_KEY,
                         "Content-Type": "application/json; charset=utf-8"
                     },
                     body: JSON.stringify({
