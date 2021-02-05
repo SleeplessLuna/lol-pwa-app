@@ -3,20 +3,11 @@ import React, { useState, useEffect, createContext } from "react";
 export const Context = createContext();
 
 const ContextProvider = (props) => {
-    const OneSignal = window.OneSignal || [];
     const [OneSignalUserId, setOneSignalUserId] = useState(null);
     const [Result, setResult] = useState(null);
 
-    /*     function GiveMeTheUserID() {
-        OneSignal.push(function () {
-            OneSignal.getUserId().then(function (userId) {
-                console.log("OneSignal User ID:", userId);
-                setOneSignalUserId(userId);
-            });
-        });
-    } */
-
-    if (OneSignal !== []) {
+    async function GiveMeTheUserID() {
+        const OneSignal = window.OneSignal || [];
         OneSignal.push(function () {
             OneSignal.getUserId().then(function (userId) {
                 console.log("OneSignal User ID:", userId);
@@ -25,8 +16,18 @@ const ContextProvider = (props) => {
         });
     }
 
+    /*     if (OneSignal !== []) {
+        OneSignal.push(function () {
+            OneSignal.getUserId().then(function (userId) {
+                console.log("OneSignal User ID:", userId);
+                setOneSignalUserId(userId);
+            });
+        });
+    } */
+
     useEffect(() => {
         (async () => {
+            await GiveMeTheUserID();
             const response = await fetch(
                 `https://onesignal.com/api/v1/notifications`,
                 {
