@@ -1,10 +1,10 @@
 import React from "react";
-import { useContext } from "react";
-import { Context } from "./components/Context";
+/* import { useContext } from "react";
+import { Context } from "./components/Context"; */
 
 function App() {
-    const { Result } = useContext(Context);
-    console.log(Result);
+    /*     const { Result } = useContext(Context);
+    console.log(Result); */
 
     return (
         <section>
