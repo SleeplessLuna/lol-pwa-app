@@ -8,11 +8,14 @@ const ContextProvider = (props) => {
     const [Result, setResult] = useState(null);
 
     if (OneSignal) {
-        OneSignal.push(function () {
-            OneSignal.getUserId().then(function (userId) {
+        OneSignal.push(async () => {
+            const userId = await OneSignal.getUserId();
+            if (userId) {
                 console.log("OneSignal User ID:", userId);
                 setOneSignalUserId(userId);
-            });
+            } else {
+                console.log("this is an error message");
+            }
         });
     } else {
         console.log(
@@ -32,7 +35,7 @@ const ContextProvider = (props) => {
                         },
                         body: JSON.stringify({
                             app_id: "d7e0ffdf-e3cc-418f-b319-8d70e58ccdeb",
-                            include_player_ids: [`${await OneSignalUserId}`],
+                            include_player_ids: [`${OneSignalUserId}`],
                             data: { foo: "bar" },
                             contents: { en: "English Message" },
                         }),
