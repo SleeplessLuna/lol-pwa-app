@@ -7,24 +7,18 @@ const ContextProvider = (props) => {
     const [OneSignalUserId, setOneSignalUserId] = useState(null);
     const [Result, setResult] = useState(null);
 
-    if (OneSignal) {
-        OneSignal.push(async () => {
-            const userId = await OneSignal.getUserId();
-            if (userId) {
+    if (OneSignal !== []) {
+        OneSignal.push(function () {
+            OneSignal.getUserId().then(function (userId) {
                 console.log("OneSignal User ID:", userId);
                 setOneSignalUserId(userId);
-            } else {
-                console.log("this is an error message");
-            }
+            });
         });
     } else {
-        console.log(
-            "i am an uncaught error for some reason and i dont know why"
-        );
+        console.log("idk");
     }
-
     useEffect(() => {
-        if (OneSignalUserId !== null) {
+        if (OneSignalUserId !== null)
             (async () => {
                 const response = await fetch(
                     `https://onesignal.com/api/v1/notifications`,
@@ -45,7 +39,6 @@ const ContextProvider = (props) => {
                 console.log(result);
                 setResult(result);
             })();
-        }
     }, [OneSignalUserId]);
 
     return (
