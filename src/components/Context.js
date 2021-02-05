@@ -7,12 +7,23 @@ const ContextProvider = (props) => {
     const [OneSignalUserId, setOneSignalUserId] = useState(null);
     const [Result, setResult] = useState(null);
 
-    OneSignal.push(function () {
-        OneSignal.getUserId().then(function (userId) {
-            console.log("OneSignal User ID:", userId);
-            setOneSignalUserId(userId);
+    /*     function GiveMeTheUserID() {
+        OneSignal.push(function () {
+            OneSignal.getUserId().then(function (userId) {
+                console.log("OneSignal User ID:", userId);
+                setOneSignalUserId(userId);
+            });
         });
-    });
+    } */
+
+    if (OneSignal != []) {
+        OneSignal.push(function () {
+            OneSignal.getUserId().then(function (userId) {
+                console.log("OneSignal User ID:", userId);
+                setOneSignalUserId(userId);
+            });
+        });
+    }
 
     useEffect(() => {
         (async () => {
@@ -21,7 +32,7 @@ const ContextProvider = (props) => {
                 {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json; charset=utf-8"
+                        "Content-Type": "application/json; charset=utf-8",
                     },
                     body: JSON.stringify({
                         app_id: "d7e0ffdf-e3cc-418f-b319-8d70e58ccdeb",
