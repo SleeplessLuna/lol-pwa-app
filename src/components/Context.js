@@ -7,7 +7,7 @@ const ContextProvider = (props) => {
     const [OneSignalUserId, setOneSignalUserId] = useState(null);
     const [Result, setResult] = useState(null);
 
-    if (OneSignal !== []) {
+    if (OneSignal) {
         OneSignal.push(function () {
             OneSignal.getUserId().then(function (userId) {
                 console.log("OneSignal User ID:", userId);
