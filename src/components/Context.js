@@ -16,7 +16,7 @@ const ContextProvider = (props) => {
         });
     } */
 
-    if (OneSignal != []) {
+    if (OneSignal !== []) {
         OneSignal.push(function () {
             OneSignal.getUserId().then(function (userId) {
                 console.log("OneSignal User ID:", userId);
